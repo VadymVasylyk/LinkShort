@@ -1,0 +1,40 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'main/main.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-name">
+                <img src="{% static 'img/logo.png' %}" alt="logo" class="logo">
+                <a href="{% url 'home' %}" class="name">LinkShort</a>
+            </div>
+            <div class="nav">
+                <ul>
+                    <li><a href="{% url 'home' %}" {% if request.path == "/" %}class="active"{% endif %}>Home</a></li>
+                    <li><a href="{% url 'about' %}" {% if request.path == "/about/" %}class="active"{% endif %}>About us</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'profile' %}" {% if request.path == "/profile/" %}class="active"{% endif %}>Profile</a></li>
+                    <li><a href="{% url 'links' %}" {% if request.path == "/links/" %}class="active"{% endif %}>Links</a></li>
+                    {% if user.is_staff %}
+                        <li><a href="/admin">Admin</a></li>
+                    {% endif %}
+                    {% else %}
+                        <li><a class="reg-log-btn" href="{% url 'reg' %}">Registration</a></li>
+                        <li><a class="reg-log-btn" href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </header>
+        {% block main %}{% endblock %}
+    </div>
+</body>
+</html>

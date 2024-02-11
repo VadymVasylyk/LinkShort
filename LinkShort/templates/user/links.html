@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}LinkShort{% endblock %}
+
+{% block main %}
+<form method="post" class="form">
+    {% csrf_token %}
+    <h1>Link shortening</h1>
+    <div class="form-group">
+        {{ form.long.label_tag }}
+        {{ form.long }}
+    </div>
+    <div class="form-group">
+        {{ form.short.label_tag }}
+        {{ form.short }}
+    </div>
+    <button type="submit" class="btn">OK</button>
+</form>
+
+{% if messages %}
+    {% for message in messages %}
+        <p>{{message}}</p>
+    {% endfor %}
+{% endif %}
+
+<div class="links">
+    <div>
+        <h1>Your links:</h1>
+        {% for link in links %}
+            <p><b>Link:</b> <a href="{{link.long}}">/link/{{link.short}}</a></p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

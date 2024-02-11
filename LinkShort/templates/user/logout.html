@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Logout{% endblock %}
+
+
+{% block main %}
+<div class="logout-div">
+    <h1>You've successfully logged out!</h1>
+    <a href="{% url 'login' %}" class="btn">Login again</a>
+    <a href="{% url 'home' %}" class="main-pg-btn">Main page</a>
+</div>
+{% endblock %}
